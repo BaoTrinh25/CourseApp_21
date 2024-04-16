@@ -1,10 +1,11 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 from ckeditor.fields import RichTextField
+from cloudinary.models import CloudinaryField
 
 
 class User(AbstractUser):
-    pass
+    avatar = CloudinaryField(null=True)
 
 
 class BaseModel(models.Model):
@@ -40,8 +41,8 @@ class ItemBase(BaseModel):
 class Course(ItemBase):
     name = models.CharField(max_length=255)
     description = RichTextField()
-    image = models.ImageField(upload_to='courseapp/%Y/%m/')
-    category = models.ForeignKey(Category, on_delete=models.CASCADE)
+    image = CloudinaryField(null=True)
+    category = models.ForeignKey(Category, on_delete=models.PROTECT)
 
     def __str__(self):
         return self.name
@@ -50,7 +51,7 @@ class Course(ItemBase):
 class Lesson(ItemBase):
     subject = models.CharField(max_length=255)
     content = RichTextField()
-    image = models.ImageField(upload_to='lesson/%Y/%m/')
+    image = CloudinaryField(null=True)
     course = models.ForeignKey(Course, on_delete=models.CASCADE)
 
     def __str__(self):

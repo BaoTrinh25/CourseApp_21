@@ -38,7 +38,6 @@ CKEDITOR_UPLOAD_PATH = "ckeditors/images/"
 
 AUTH_USER_MODEL = 'courseapp.User'
 
-
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -81,6 +80,14 @@ DATABASES = {
         'HOST': ''  # mặc định localhost
     }
 }
+
+import cloudinary
+
+cloudinary.config(
+    cloud_name="des7wmwn0",
+    api_key="348292977468397",
+    api_secret="9qJ5YCtTvXWQjRO_t4DGVf7k4JM"
+)
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
