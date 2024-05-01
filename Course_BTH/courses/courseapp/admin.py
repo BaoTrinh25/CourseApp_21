@@ -1,10 +1,16 @@
 from django.contrib import admin
 from django.utils.html import mark_safe
-from .models import Category, Course, Lesson, User, Tag
+from .models import Category, Course, Lesson, User, Tag, Comment, Like
 from django import forms
 from ckeditor_uploader.widgets import CKEditorUploadingWidget
 import cloudinary
 
+
+class MyCourseAdminSite(admin.AdminSite):
+    site_header = 'eCourseOnline'
+
+
+admin_site = MyCourseAdminSite(name='iCourse')
 
 class CourseForm(forms.ModelForm):
     description = forms.CharField(widget=CKEditorUploadingWidget)
@@ -33,8 +39,10 @@ class MyCourseAdmin(admin.ModelAdmin):
         }
 
 
-admin.site.register(Category)
-admin.site.register(Lesson)
-admin.site.register(User)
-admin.site.register(Tag)
-admin.site.register(Course, MyCourseAdmin)
+admin_site.register(Category)
+admin_site.register(Lesson)
+admin_site.register(User)
+admin_site.register(Tag)
+admin_site.register(Course, MyCourseAdmin)
+admin_site.register(Comment)
+admin_site.register(Like)
